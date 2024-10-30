@@ -1,0 +1,11 @@
+<!-- res/values/colors.xml -->
+<resources>
+    <!-- Primary color for buttons and main themes -->
+    <color name="colorPrimary">#6200EA</color> <!-- Deep purple color -->
+    <color name="colorPrimaryDark">#3700B3</color> <!-- Darker shade of purple -->
+    <color name="colorAccent">#03DAC5</color> <!-- Teal accent color -->
+
+    <!-- Other colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+</resources>
