@@ -1,4 +1,4 @@
-package com.example.ecommerceapp;
+package com.example.shoppingmantra;
 
 import android.os.Bundle;
 import android.text.TextUtils;
