@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+     android:gravity="center"
     android:background="@color/black"
     tools:context=".LoginActivity">
 
@@ -14,8 +15,6 @@
         android:layout_height="100dp"
         android:src="@drawable/applogo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="60dp"
         />
 
     <EditText
@@ -94,18 +93,18 @@
 
 
     <TextView
-        android:id="@+id/admin_panel_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="I'm an Admin?"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/login_btn"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginLeft="80dp"
-        android:layout_marginEnd="23dp"
-        />
+    android:id="@+id/admin_panel_link"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="I'm an Admin?"
+    android:layout_alignParentEnd="true"
+    android:layout_below="@+id/login_btn"
+    android:textColor="@color/white"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    android:layout_marginLeft="80dp"
+    android:layout_marginEnd="23dp"
+    />
 
 
     <TextView
