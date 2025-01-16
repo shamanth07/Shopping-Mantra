@@ -1,4 +1,4 @@
-package Admin;
+package com.example.shoppingmantra.Admin;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,8 +14,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.shoppingmantra.R;
+import com.example.ecommerceapp.R;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -134,13 +137,15 @@ public class AdminAddNewProductActivity extends AppCompatActivity
 
 
 
-    private void StoreProductInformation() {
+    private void StoreProductInformation()
+    {
         loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Please wait while we are adding the new product.");
+        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
 
         Calendar calendar = Calendar.getInstance();
+
         SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
         saveCurrentDate = currentDate.format(calendar.getTime());
 
@@ -149,24 +154,57 @@ public class AdminAddNewProductActivity extends AppCompatActivity
 
         productRandomKey = saveCurrentDate + saveCurrentTime;
 
-        final StorageReference filePath = ProductImagesRef.child("Product Images/" + productRandomKey + ".jpg");
+
+        final StorageReference filePath = ProductImagesRef.child(ImageUri.getLastPathSegment() + productRandomKey + ".jpg");
 
         final UploadTask uploadTask = filePath.putFile(ImageUri);
 
-        uploadTask.addOnFailureListener(e -> {
-            String message = e.toString();
-            Toast.makeText(AdminAddNewProductActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
-            loadingBar.dismiss();
-        }).addOnSuccessListener(taskSnapshot -> {
-            filePath.getDownloadUrl().addOnSuccessListener(uri -> {
-                downloadImageUrl = uri.toString();
-                SaveProductInfoToDatabase();
-            }).addOnFailureListener(e -> {
-                Toast.makeText(AdminAddNewProductActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e)
+            {
+                String message = e.toString();
+                Toast.makeText(AdminAddNewProductActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                 loadingBar.dismiss();
-            });
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
+            {
+                Toast.makeText(AdminAddNewProductActivity.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception
+                    {
+                        if (!task.isSuccessful())
+                        {
+                            throw task.getException();
+                        }
+
+                        downloadImageUrl = filePath.getDownloadUrl().toString();
+                        return filePath.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            downloadImageUrl = task.getResult().toString();
+
+                            Toast.makeText(AdminAddNewProductActivity.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+
+                            SaveProductInfoToDatabase();
+                        }
+                    }
+                });
+            }
         });
     }
+
+
 
     private void SaveProductInfoToDatabase()
     {
