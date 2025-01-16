@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:paddingTop="50dp">
 
-    <!-- Title -->
     <TextView
         android:id="@+id/home_title"
         android:layout_width="match_parent"
@@ -17,24 +16,23 @@
         android:textStyle="bold"
         android:textColor="@color/black"/>
 
-    <!-- GridLayout for Categories -->
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/category_grid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="363dp"
+        android:layout_height="534dp"
         android:layout_below="@id/home_title"
-        android:padding="16dp"
+        android:layout_marginTop="17dp"
+        android:padding="10dp"
         app:columnCount="3">
 
-        <!-- T-Shirts -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
+            android:onClick="openCategory"
+            android:orientation="vertical"
             android:padding="8dp"
-            android:tag="T-Shirts"
-            android:onClick="openCategory">
+            android:tag="T-Shirts">
 
             <ImageView
                 android:layout_width="80dp"
@@ -44,20 +42,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="8dp"
                 android:text="T-Shirts"
-                android:textSize="16sp"
-                android:paddingTop="8dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Sports T-Shirts -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
+            android:onClick="openCategory"
+            android:orientation="vertical"
             android:padding="8dp"
-            android:tag="Sports T-Shirts"
-            android:onClick="openCategory">
+            android:tag="Sports T-Shirts">
 
             <ImageView
                 android:layout_width="80dp"
@@ -67,20 +64,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="8dp"
                 android:text="Sports T-Shirts"
-                android:textSize="16sp"
-                android:paddingTop="8dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Female Dresses -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
+            android:onClick="openCategory"
+            android:orientation="vertical"
             android:padding="8dp"
-            android:tag="Female Dresses"
-            android:onClick="openCategory">
+            android:tag="Female Dresses">
 
             <ImageView
                 android:layout_width="80dp"
@@ -90,20 +86,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="8dp"
                 android:text="Female Dresses"
-                android:textSize="16sp"
-                android:paddingTop="8dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Sweaters -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
+            android:onClick="openCategory"
+            android:orientation="vertical"
             android:padding="8dp"
-            android:tag="Sweaters"
-            android:onClick="openCategory">
+            android:tag="Sweaters">
 
             <ImageView
                 android:layout_width="80dp"
@@ -113,20 +108,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="8dp"
                 android:text="Sweaters"
-                android:textSize="16sp"
-                android:paddingTop="8dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Glasses -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
+            android:onClick="openCategory"
+            android:orientation="vertical"
             android:padding="8dp"
-            android:tag="Glasses"
-            android:onClick="openCategory">
+            android:tag="Glasses">
 
             <ImageView
                 android:layout_width="80dp"
@@ -136,20 +130,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="8dp"
                 android:text="Glasses"
-                android:textSize="16sp"
-                android:paddingTop="8dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Purses and Bags -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
+            android:onClick="openCategory"
+            android:orientation="vertical"
             android:padding="8dp"
-            android:tag="Purses and Bags"
-            android:onClick="openCategory">
+            android:tag="Purses and Bags">
 
             <ImageView
                 android:layout_width="80dp"
@@ -159,20 +152,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="8dp"
                 android:text="Purses and Bags"
-                android:textSize="16sp"
-                android:paddingTop="8dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Hats -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
+            android:onClick="openCategory"
+            android:orientation="vertical"
             android:padding="8dp"
-            android:tag="Hats"
-            android:onClick="openCategory">
+            android:tag="Hats">
 
             <ImageView
                 android:layout_width="80dp"
@@ -182,20 +174,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="8dp"
                 android:text="Hats"
-                android:textSize="16sp"
-                android:paddingTop="8dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Shoes -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
+            android:onClick="openCategory"
+            android:orientation="vertical"
             android:padding="8dp"
-            android:tag="Shoes"
-            android:onClick="openCategory">
+            android:tag="Shoes">
 
             <ImageView
                 android:layout_width="80dp"
@@ -205,20 +196,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="8dp"
                 android:text="Shoes"
-                android:textSize="16sp"
-                android:paddingTop="8dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Headphones -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
+            android:onClick="openCategory"
+            android:orientation="vertical"
             android:padding="8dp"
-            android:tag="Headphones"
-            android:onClick="openCategory">
+            android:tag="Headphones">
 
             <ImageView
                 android:layout_width="80dp"
@@ -228,20 +218,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="8dp"
                 android:text="Headphones"
-                android:textSize="16sp"
-                android:paddingTop="8dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Laptops -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
+            android:onClick="openCategory"
+            android:orientation="vertical"
             android:padding="8dp"
-            android:tag="Laptops"
-            android:onClick="openCategory">
+            android:tag="Laptops">
 
             <ImageView
                 android:layout_width="90dp"
@@ -251,20 +240,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="8dp"
                 android:text="Laptops"
-                android:textSize="16sp"
-                android:paddingTop="8dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Watches -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
+            android:onClick="openCategory"
+            android:orientation="vertical"
             android:padding="8dp"
-            android:tag="Watches"
-            android:onClick="openCategory">
+            android:tag="Watches">
 
             <ImageView
                 android:layout_width="80dp"
@@ -274,20 +262,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="8dp"
                 android:text="Watches"
-                android:textSize="16sp"
-                android:paddingTop="8dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Mobile Phones -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
+            android:onClick="openCategory"
+            android:orientation="vertical"
             android:padding="8dp"
-            android:tag="Mobile Phones"
-            android:onClick="openCategory">
+            android:tag="Mobile Phones">
 
             <ImageView
                 android:layout_width="80dp"
@@ -297,9 +284,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="8dp"
                 android:text="Mobile Phones"
-                android:textSize="16sp"
-                android:paddingTop="8dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
     </androidx.gridlayout.widget.GridLayout>
