@@ -39,7 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         // Hardcode the role options
-        String[] roles = {"User", "Admin"};
+        String[] roles = {"User", "com/example/shoppingmantra/Admin"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Arrays.asList(roles));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         roleSpinner.setAdapter(adapter);
@@ -73,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void saveUserToDatabase(String userId, String email, String role) {
         // Determine the database path based on the role
-        DatabaseReference userRef = databaseReference.child(role.equals("Admin") ? "admins" : "users").child(userId);
+        DatabaseReference userRef = databaseReference.child(role.equals("com/example/shoppingmantra/Admin") ? "admins" : "users").child(userId);
         userRef.setValue(new User(email, role)).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Toast.makeText(SignUpActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
