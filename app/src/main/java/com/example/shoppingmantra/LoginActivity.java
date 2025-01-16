@@ -1,6 +1,5 @@
 package com.example.shoppingmantra;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.shoppingmantra.Activity.AdminActivity;
+import com.example.ecommerceapp.Admin.AdminCategoryActivity;
+import com.example.ecommerceapp.Model.Users;
+import com.example.ecommerceapp.Prevalent.Prevalent;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,12 +27,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import io.paperdb.Paper;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText InputEmail, InputPassword;
     private Button LoginButton;
     private TextView AdminLink, NotAdminLink, ForgetPasswordLink;
     private ProgressDialog loadingBar;
+    private CheckBox chkBoxRememberMe;
     private FirebaseAuth firebaseAuth;
 
     private boolean isAdminMode = false;
@@ -48,10 +53,13 @@ public class LoginActivity extends AppCompatActivity {
         AdminLink = findViewById(R.id.admin_panel_link);
         NotAdminLink = findViewById(R.id.not_admin_panel_link);
         ForgetPasswordLink = findViewById(R.id.forget_password_link);
-
         loadingBar = new ProgressDialog(this);
 
+        Paper.init(this);
+
         LoginButton.setOnClickListener(view -> loginUser());
+
+        ForgetPasswordLink.setOnClickListener(view -> showResetPasswordDialog());
 
         AdminLink.setOnClickListener(view -> {
             isAdminMode = true;
@@ -91,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (isAdminMode) {
                                     checkIfAdmin(user.getEmail());
                                 } else {
-                                    fetchUserData(user.getEmail());
+                                    checkIfUser(user.getEmail());
                                 }
                             }
                         } else {
@@ -109,7 +117,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     Toast.makeText(LoginActivity.this, "Welcome Admin, you are logged in successfully.", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, AdminActivity.class));
+                    Intent intent = new Intent(LoginActivity.this, AdminCategoryActivity.class);
+                    startActivity(intent);
                     finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "No admin account found with this email.", Toast.LENGTH_SHORT).show();
@@ -123,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void fetchUserData(String email) {
+    private void checkIfUser(String email) {
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         userRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -132,16 +141,14 @@ public class LoginActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                         Users user = userSnapshot.getValue(Users.class);
-
-                        // Pass user data to HomeActivity
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("userName", user.getName());
-                        intent.putExtra("userEmail", user.getEmail());
-                        intent.putExtra("userImage", user.getImage());
-                        startActivity(intent);
-                        finish();
-                        break;
+                        Prevalent.currentOnlineUser = user;
+                        Prevalent.currentOnlineUserEmail = user.getEmail();
                     }
+
+                    Toast.makeText(LoginActivity.this, "Logged in successfully.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "No user account found with this email.", Toast.LENGTH_SHORT).show();
                 }
@@ -154,7 +161,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void showResetPasswordDialog() {
+private void showResetPasswordDialog() {
         LayoutInflater inflater = LayoutInflater.from(this);
         View dialogView = inflater.inflate(R.layout.dialog_reset_password, null);
 
